@@ -1,0 +1,10 @@
+@font-face {
+  font-family: "Unica One";
+  src: local("Unica One"), url("./fonts/UnicaOne-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Schibsted Grotesk";
+  src: local("Schibsted Grotesk"),
+    url("./fonts/SchibstedGrotesk-VariableFont_wght.ttf");
+}

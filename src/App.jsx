@@ -4,7 +4,7 @@ import { Main } from "./components/Main/Main.jsx";
 function App() {
   return (
     <>
-      <main>
+      <main className="bg-dark-blue">
         <Header />
         <Main />
       </main>
