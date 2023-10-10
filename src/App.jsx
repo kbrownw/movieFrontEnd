@@ -1,12 +1,14 @@
-import Header from "./components/Header/Header.jsx";
-import { Main } from "./components/Main/Main.jsx";
+import { LandingPage } from "./components/LandingPage/LandingPage.jsx";
+import { Header } from "./components/Header/Header.jsx";
+import { Footer } from "./components/Footer.jsx";
 
 function App() {
   return (
     <>
       <main className="bg-dark-blue">
         <Header />
-        <Main />
+        <LandingPage />
+        <Footer />
       </main>
     </>
   );

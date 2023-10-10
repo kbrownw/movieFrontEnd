@@ -4,8 +4,16 @@
 @tailwind components;
 @tailwind utilities;
 
-h1 {
+body {
+  overflow-x: hidden;
+}
+
+h1,
+h2 {
   font-family: "Unica One";
+}
+
+h1 {
   font-size: 60px;
 }
 
@@ -14,4 +22,27 @@ li,
 a {
   font-family: "Schibsted Grotesk";
   font-weight: bold;
+}
+
+label,
+input {
+  font-family: "Schibsted Grotesk";
+}
+
+.ellipse {
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 50%;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }
