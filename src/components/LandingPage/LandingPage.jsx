@@ -4,14 +4,21 @@ import { TitleLargeWhite } from "../TitleLargeWhite";
 import Search from "../Search/Search";
 import Results from "../Results/Results";
 import star from "../../assets/star-line.svg";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const pText =
   "Want to find movie showtimes near you? Just enter your ZIP code and we'll do the rest. Ready, set, action!";
 
 export const LandingPage = () => {
-  const [theaters, setTheaters] = useState({});
+  const [theatersFound, setTheatersFound] = useState(true);
+  const [theaters, setTheaters] = useState([]);
 
+  useEffect(() => {
+    if (theaters.length > 0) {
+      const theaterList = document.getElementById("theater-results");
+      theaterList.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [theaters]);
   return (
     <>
       <LargeImage />
@@ -26,11 +33,13 @@ export const LandingPage = () => {
         />
         <TitleLargeWhite title="ZIP SEARCH" />
         <ParagraphTextWhite text={pText} />
-        <Search setTheaters={setTheaters} />
+        <Search setTheaters={setTheaters} setTheatersFound={setTheatersFound} />
       </div>
-      <div className="grid grid-cols-1 justify-items-center max-w-6xl lg:px-0 px-4 mx-auto relative">
-        <Results theaterResults={theaters} />
-      </div>
+      <>
+        {theaters.length > 0 || !theatersFound ? (
+          <Results theaterResults={theaters} theatersFound={theatersFound} />
+        ) : null}
+      </>
     </>
   );
 };

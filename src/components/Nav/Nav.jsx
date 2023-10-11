@@ -22,9 +22,13 @@ export const Nav = () => {
     );
   });
   return (
-    <nav className="grid grid-cols-2 border-y border-y-black py-4 relative">
-      <p>Showtimes by Keith</p>
-      <ul className="flex flex-row justify-self-end gap-5">{navItems}</ul>
+    <nav className="grid  gap-10 grid-cols-1 sm:grid-cols-2 border-y border-y-black py-4 relative">
+      <p className="justify-self-center sm:justify-self-start">
+        Showtimes by Keith
+      </p>
+      <ul className="grid grid-cols-1 justify-self-center sm:grid-cols-3 sm:justify-self-end gap-5">
+        {navItems}
+      </ul>
     </nav>
   );
 };

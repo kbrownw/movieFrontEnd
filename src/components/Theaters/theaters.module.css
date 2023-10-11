@@ -1,0 +1,30 @@
+.border-tl-lg {
+  border-top-left-radius: 200px;
+}
+
+.border-tl-sm {
+  border-top-left-radius: 1.5rem;
+}
+.border-tr-lg {
+  border-top-right-radius: 200px;
+}
+
+.border-tr-sm {
+  border-top-right-radius: 1.5rem;
+}
+
+.border-bl-lg {
+  border-bottom-left-radius: 200px;
+}
+
+.border-bl-sm {
+  border-bottom-left-radius: 1.5rem;
+}
+
+.border-br-lg {
+  border-bottom-right-radius: 200px;
+}
+
+.border-br-sm {
+  border-bottom-right-radius: 1.5rem;
+}

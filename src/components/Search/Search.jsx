@@ -1,16 +1,27 @@
 import { useState } from "react";
 
-export const Search = ({ setTheaters }) => {
+export const Search = ({ setTheaters, setTheatersFound }) => {
   const [zipCode, setZipCode] = useState("");
   let theaterURL = "http://localhost:3000/?zipCode=";
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     theaterURL = theaterURL + zipCode;
-    const response = await fetch(theaterURL);
-    const data = await response.json();
-    console.log(data);
-    setTheaters(data);
+    let response;
+    let data;
+    try {
+      response = await fetch(theaterURL);
+    } catch (error) {
+      console.log(error);
+    }
+    try {
+      data = await response.json();
+      setTheaters(data.data.theaters);
+      setTheatersFound(true);
+    } catch (error) {
+      console.log(error);
+      setTheaters([]);
+      setTheatersFound(false);
+    }
   };
 
   return (

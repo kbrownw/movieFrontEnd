@@ -7,6 +7,7 @@ export default {
         red: "#F2542D",
         "dark-blue": "#127475",
         blue: "#15898B",
+        brown: "#562C2C",
       },
     },
   },
