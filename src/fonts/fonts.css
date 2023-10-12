@@ -1,10 +1,10 @@
 @font-face {
   font-family: "Unica One";
   src: local("Unica One Regular"), local("UnicaOne-Regular"),
-    url("UnicaOne-Regular.woff2") format("woff2"),
-    url("UnicaOne-Regular.woff") format("woff"),
-    url("UnicaOne-Regular.ttf") format("truetype"),
-    url("UnicaOne-Regular.svg#UnicaOne-Regular") format("svg");
+    url("./fonts/UnicaOne-Regular.woff2") format("woff2"),
+    url("./fonts/UnicaOne-Regular.woff") format("woff"),
+    url("./fonts/UnicaOne-Regular.ttf") format("truetype"),
+    url("./fonts/UnicaOne-Regular.svg#UnicaOne-Regular") format("svg");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
