@@ -2,7 +2,7 @@ import { HeaderTextArea } from "../HeaderTextArea/HeaderTextArea";
 import { Nav } from "../Nav/Nav";
 
 const headerParagraph =
-  "Welcome to Showtime Central! Discover local theaters and find movie showtimes, all in one exciting place.";
+  "Welcome to Showtimes by Keith! Discover local theaters and find movie showtimes, all in one exciting place.";
 
 export const Header = () => {
   return (
