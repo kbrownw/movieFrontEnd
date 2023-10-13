@@ -2,7 +2,7 @@ import { useState } from "react";
 
 export const Search = ({ setTheaters, setTheatersFound }) => {
   const [zipCode, setZipCode] = useState("");
-  let theaterURL = "https://api.showtimes-by-keith.com:3000/?zipCode=";
+  let theaterURL = "https://api.showtimes-by-keith.com/?zipCode=";
   const handleSubmit = async (e) => {
     e.preventDefault();
     theaterURL = theaterURL + zipCode;
