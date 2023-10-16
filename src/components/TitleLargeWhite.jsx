@@ -1,3 +1,3 @@
-export const TitleLargeWhite = ({ title }) => {
-  return <h1 className="text-white text-[14vw] relative">{title}</h1>;
+export const TitleLargeWhite = ({ title, classes }) => {
+  return <h1 className={`${classes} text-white relative`}>{title}</h1>;
 };

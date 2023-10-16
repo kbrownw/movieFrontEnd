@@ -6,7 +6,7 @@ const headerParagraph =
 
 export const Header = () => {
   return (
-    <div className="bg-red relative py-20">
+    <header className="bg-red relative py-20">
       <div
         className={`ellipse w-[317px] h-[215px] border-color-white absolute top-28 -left-20 rotate-[66deg]`}
       ></div>
@@ -23,7 +23,7 @@ export const Header = () => {
           headerParagraph={headerParagraph}
         />
       </div>
-    </div>
+    </header>
   );
 };
 

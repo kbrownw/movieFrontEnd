@@ -1,7 +1,9 @@
+import { Link } from "react-router-dom";
+
 const navList = [
   {
     text: "Home",
-    url: "/#top",
+    url: "/",
   },
   {
     text: "Theaters",
@@ -16,9 +18,9 @@ const navList = [
 export const Nav = () => {
   const navItems = Object.values(navList).map(({ text, url }) => {
     return (
-      <a href={url} key={text}>
+      <Link to={url} key={text}>
         <li>{text}</li>
-      </a>
+      </Link>
     );
   });
   return (

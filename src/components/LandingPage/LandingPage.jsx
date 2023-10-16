@@ -22,7 +22,7 @@ export const LandingPage = () => {
   return (
     <>
       <LargeImage />
-      <div className="grid grid-cols-1 justify-items-center max-w-6xl lg:px-0 px-4 mb-40 mx-auto relative">
+      <div className="grid grid-cols-1 gap-5 justify-items-center max-w-6xl lg:px-0 px-4 mb-40 mx-auto relative">
         <div
           className={`w-[570px] h-[290px] border-slate-400 ellipse absolute top-[300px] -left-[190px] -rotate-[134deg] opacity-50`}
         ></div>
@@ -31,9 +31,16 @@ export const LandingPage = () => {
           className="absolute h-[500px] top-[50px] -right-[200px] grayscale opacity-25"
           alt="Star"
         />
-        <TitleLargeWhite title="ZIP SEARCH" />
+        <TitleLargeWhite
+          title="ZIP SEARCH"
+          classes="md:text-[10rem] lg:text-[15rem]"
+        />
         <ParagraphTextWhite text={pText} />
-        <Search setTheaters={setTheaters} setTheatersFound={setTheatersFound} />
+        <Search
+          setTheaters={setTheaters}
+          setTheatersFound={setTheatersFound}
+          theaters={theaters}
+        />
       </div>
       <>
         {theaters.length > 0 || !theatersFound ? (
