@@ -1,6 +1,8 @@
 import styles from "./theaters.module.css";
 import { useShowtimeAPI } from "../../hooks/useShowtimeAPI";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { ShowtimesContext } from "../../context/ShowtimesProvider";
 
 export const borderRadiusRandom = () => {
   let cornersArray = [];
@@ -19,7 +21,7 @@ export const borderRadiusRandom = () => {
 };
 
 export const Theaters = ({ theaters }) => {
-  const { getShowtimes } = useShowtimeAPI();
+  const { getShowtimes } = useContext(ShowtimesContext);
   const navigate = useNavigate();
 
   const theaterCard = Object.values(theaters).map(

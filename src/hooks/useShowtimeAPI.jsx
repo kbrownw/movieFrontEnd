@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const useShowtimeAPI = () => {
   const [showtimes, setShowtimes] = useState({});
@@ -7,25 +7,21 @@ export const useShowtimeAPI = () => {
   let data;
 
   const getShowtimes = async (id) => {
-    const url = "http://localhost:8080/showtimes?id=" + id;
+    const url = "https://api.showtimes-by-keith.com/showtimes?id=" + id;
     let response;
 
     setLoading(true);
     try {
       response = await fetch(url);
     } catch (error) {
-      console.log(error);
+      console.log("Fetch error: ", error);
     }
     try {
       data = await response.json();
+      console.log("API Data: ", data);
+      setShowtimes(data);
     } catch (error) {
       console.log("Data error", error);
-    }
-    try {
-      setShowtimes(data);
-      console.log(data);
-    } catch (error) {
-      console.log("Set showtimes error", error);
     } finally {
       setLoading(false);
     }
