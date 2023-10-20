@@ -18,8 +18,7 @@ export const useShowtimeAPI = () => {
     }
     try {
       data = await response.json();
-      console.log("API Data: ", data);
-      setShowtimes(data);
+      setShowtimes(data.data.theaterShowtimeGroupings);
     } catch (error) {
       console.log("Data error", error);
     } finally {

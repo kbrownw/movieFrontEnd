@@ -1,0 +1,7 @@
+.movie-card {
+  grid-template-columns: 1fr 4fr;
+}
+
+.movie-card-details {
+  grid-template-rows: max-content;
+}
