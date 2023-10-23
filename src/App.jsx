@@ -17,7 +17,14 @@ function App() {
         <ShowtimesWrapper>
           <Routes>
             <Route path="/" element={<LandingPage />}></Route>
-            <Route path={`/showtimes`} element={<ShowtimesLanding />}></Route>
+            <Route
+              path={`/showtimes`}
+              element={
+                <section className="grid grid-cols-1 gap-10 max-w-6xl lg:px-0 px-4 py-10 mx-auto relative">
+                  <ShowtimesLanding />
+                </section>
+              }
+            ></Route>
           </Routes>
         </ShowtimesWrapper>
         <Footer />

@@ -1,18 +1,24 @@
 import { TitleLargeWhite } from "./TitleLargeWhite";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { ShowtimesContext } from "../context/ShowtimesProvider";
 import { MovieCard } from "./MovieCard/MovieCard";
 
 export const ShowtimesLanding = () => {
-  const { isLoading, showtimes } = useContext(ShowtimesContext);
+  const { isLoading, showtimes, errorOccurred } = useContext(ShowtimesContext);
+  const showtimesST = JSON.parse(sessionStorage.getItem("showtimes"));
 
-  return (
-    <section className="grid grid-cols-1 gap-10 max-w-6xl lg:px-0 px-4 py-10 mx-auto relative">
-      {isLoading ? (
-        <TitleLargeWhite title="Loading..." />
-      ) : (
-        <MovieCard showtimes={showtimes} />
-      )}
-    </section>
-  );
+  if (isLoading) {
+    return <TitleLargeWhite title="Loading..." classes="text-center" />;
+  } else {
+    if (errorOccurred || !showtimesST) {
+      return (
+        <TitleLargeWhite
+          title="Uh oh, something went wrong. Try again later"
+          classes="text-center"
+        />
+      );
+    } else {
+      return <MovieCard showtimes={showtimesST ? showtimesST : showtimes} />;
+    }
+  }
 };
