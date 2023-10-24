@@ -43,7 +43,7 @@ export const MovieCard = ({ showtimes }) => {
           key={fandangoId}
           className={`grid grid-cols-1 md:grid-cols-[1fr_3fr] text-center gap-5 text-white bg-blue rounded-b-[1.5rem] rounded-tr-[1.5rem] overflow-hidden z-10`}
         >
-          <div className="hidden md:block">
+          <div className="max-w-[200px] md:max-w-full mx-auto">
             <img src={posterImage.url} alt={name} />
           </div>
           <div className={`grid ${styles["movie-card-details"]} gap-y-5 py-10`}>

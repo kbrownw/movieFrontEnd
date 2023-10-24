@@ -1,33 +1,43 @@
-import { useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Button } from "../Button";
+import { TheaterListContext } from "../../context/TheaterListContext";
 
-export const Search = ({ setTheaters, setTheatersFound, theaters }) => {
+export const Search = () => {
+  const { theaters, setTheaters, setTheatersFound, setIsLoading } =
+    useContext(TheaterListContext);
   const [zipCode, setZipCode] = useState("");
   let theaterURL = "https://api.showtimes-by-keith.com/?zipCode=";
+
+  useEffect(() => {
+    if (theaters.length > 0) {
+      sessionStorage.setItem("theaters", JSON.stringify(theaters));
+    }
+  }, [theaters]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     theaterURL = theaterURL + zipCode;
-    let response;
-    let data;
+
     try {
-      response = await fetch(theaterURL);
-    } catch (error) {
-      console.log(error);
-    }
-    try {
-      data = await response.json();
+      const response = await fetch(theaterURL);
+      const data = await response.json();
       setTheaters(data.data.theaters);
       setTheatersFound(true);
     } catch (error) {
       console.log(error);
       setTheaters([]);
       setTheatersFound(false);
+      setIsLoading(false);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleClearResults = () => {
     setTheaters([]);
     setZipCode("");
+    sessionStorage.removeItem("theaters");
   };
 
   return (

@@ -1,5 +1,4 @@
 import styles from "./theaters.module.css";
-import { useShowtimeAPI } from "../../hooks/useShowtimeAPI";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { ShowtimesContext } from "../../context/ShowtimesProvider";
@@ -39,6 +38,7 @@ export const Theaters = ({ theaters }) => {
           onClick={(e) => {
             e.preventDefault();
             getShowtimes(id);
+            sessionStorage.setItem("theaterName", name);
             navigate("/showtimes");
           }}
           key={id}

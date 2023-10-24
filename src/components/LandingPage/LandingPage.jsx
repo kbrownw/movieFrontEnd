@@ -4,14 +4,15 @@ import { TitleLargeWhite } from "../TitleLargeWhite";
 import Search from "../Search/Search";
 import Results from "../Results/Results";
 import star from "../../assets/star-line.svg";
-import { useState, useEffect } from "react";
+import { useEffect, useContext } from "react";
+import { TheaterListContext } from "../../context/TheaterListContext";
+import { Loading } from "../Loading";
 
 const pText =
   "Want to find movie showtimes near you? Just enter your ZIP code and we'll do the rest. Ready, set, action!";
 
 export const LandingPage = () => {
-  const [theatersFound, setTheatersFound] = useState(true);
-  const [theaters, setTheaters] = useState([]);
+  const { isLoading, theaters, theatersFound } = useContext(TheaterListContext);
 
   useEffect(() => {
     if (theaters.length > 0) {
@@ -36,11 +37,8 @@ export const LandingPage = () => {
           classes="md:text-[10rem] lg:text-[15rem]"
         />
         <ParagraphTextWhite text={pText} />
-        <Search
-          setTheaters={setTheaters}
-          setTheatersFound={setTheatersFound}
-          theaters={theaters}
-        />
+        <Search />
+        {isLoading ? <Loading /> : null}
       </div>
       <>
         {theaters.length > 0 || !theatersFound ? (

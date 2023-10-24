@@ -1,4 +1,0 @@
-.theaters-grid-lg {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(300px, 1fr));
-}
