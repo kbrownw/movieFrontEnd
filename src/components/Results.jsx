@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { ParagraphTextWhite } from "../ParagraphTextWhite";
-import { Subheading } from "../Subheading";
-import { Theaters } from "../Theaters/Theaters";
-import { Loading } from "../Loading";
+import { ParagraphTextWhite } from "./ParagraphTextWhite";
+import { Subheading } from "./Subheading";
+import { Theaters } from "./Theaters/Theaters";
+import { Loading } from "./Loading";
 
 const pText =
   "Meet up at your favorite local theater and get ready to embark on a cinematic journey like no other.";

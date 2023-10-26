@@ -1,12 +1,18 @@
 import { useEffect, useState, useContext } from "react";
-import { Button } from "../Button";
-import { TheaterListContext } from "../../context/TheaterListContext";
+import { Button } from "./Button";
+import { TheaterListContext } from "../context/TheaterListContext";
 
 export const Search = () => {
   const { theaters, setTheaters, setTheatersFound, setIsLoading } =
     useContext(TheaterListContext);
   const [zipCode, setZipCode] = useState("");
   let theaterURL = "https://api.showtimes-by-keith.com/?zipCode=";
+  const devEnv = true;
+
+  if (devEnv) {
+    console.log("Use dev enivronment.");
+    theaterURL = "http://localhost:8080/?zipCode=";
+  }
 
   useEffect(() => {
     if (theaters.length > 0) {

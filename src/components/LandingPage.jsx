@@ -1,12 +1,12 @@
-import { LargeImage } from "../LargeImage/LargeImage";
-import { ParagraphTextWhite } from "../ParagraphTextWhite";
-import { TitleLargeWhite } from "../TitleLargeWhite";
-import Search from "../Search/Search";
-import Results from "../Results/Results";
-import star from "../../assets/star-line.svg";
+import { LargeImage } from "./LargeImage";
+import { ParagraphTextWhite } from "./ParagraphTextWhite";
+import { TitleLargeWhite } from "./TitleLargeWhite";
+import Search from "./Search";
+import Results from "./Results";
+import star from "../assets/star-line.svg";
 import { useEffect, useContext } from "react";
-import { TheaterListContext } from "../../context/TheaterListContext";
-import { Loading } from "../Loading";
+import { TheaterListContext } from "../context/TheaterListContext";
+import { Loading } from "./Loading";
 
 const pText =
   "Want to find movie showtimes near you? Just enter your ZIP code and we'll do the rest. Ready, set, action!";
@@ -41,7 +41,7 @@ export const LandingPage = () => {
         {isLoading ? <Loading /> : null}
       </div>
       <>
-        {theaters.length > 0 || !theatersFound ? (
+        {theaters.length > 0 && theatersFound ? (
           <Results theaterResults={theaters} theatersFound={theatersFound} />
         ) : null}
       </>

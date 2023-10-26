@@ -4,7 +4,7 @@ export const TheaterListContext = createContext();
 
 export const TheaterListWrapper = ({ children }) => {
   const [theaters, setTheaters] = useState({});
-  const [theatersFound, setTheatersFound] = useState(true);
+  const [theatersFound, setTheatersFound] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   return (

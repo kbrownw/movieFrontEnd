@@ -1,5 +1,5 @@
-import { HeaderTextArea } from "../HeaderTextArea/HeaderTextArea";
-import { Nav } from "../Nav/Nav";
+import { HeaderTextArea } from "./HeaderTextArea";
+import { Nav } from "./Nav";
 
 const headerParagraph =
   "Welcome to Showtimes by Keith! Discover local theaters and find movie showtimes, all in one exciting place.";

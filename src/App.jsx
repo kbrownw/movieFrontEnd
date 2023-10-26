@@ -1,22 +1,19 @@
-import { LandingPage } from "./components/LandingPage/LandingPage.jsx";
-import { Header } from "./components/Header/Header.jsx";
+import { LandingPage } from "./components/LandingPage.jsx";
+import { Header } from "./components/Header.jsx";
 import { Footer } from "./components/Footer.jsx";
 import { Routes, Route } from "react-router-dom";
-import { createContext, useState } from "react";
 import { ShowtimesLanding } from "./components/ShowtimesLanding.jsx";
 import { ShowtimesWrapper } from "./context/ShowtimesProvider.jsx";
 import { TheaterListWrapper } from "./context/TheaterListContext.jsx";
-
-const TheaterIdContext = createContext(null);
+import { ContactMe } from "./components/ContactMe.jsx";
 
 function App() {
-  const [theaterId, setTheaterId] = useState();
   return (
     <>
       <main className="bg-dark-blue overflow-hidden">
-        <Header />
         <ShowtimesWrapper>
           <TheaterListWrapper>
+            <Header />
             <Routes>
               <Route path="/" element={<LandingPage />}></Route>
               <Route
@@ -27,6 +24,7 @@ function App() {
                   </section>
                 }
               ></Route>
+              <Route path="/contact" element={<ContactMe />}></Route>
             </Routes>
           </TheaterListWrapper>
         </ShowtimesWrapper>

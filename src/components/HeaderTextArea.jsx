@@ -1,5 +1,5 @@
-import { HeaderParagraph } from "../HeaderParagraph/HeaderParagraph";
-import { HeaderTitle } from "../HeaderTitle/HeaderTitle";
+import { HeaderParagraph } from "./HeaderParagraph";
+import { HeaderTitle } from "./HeaderTitle";
 
 export const HeaderTextArea = ({ headerTitle, headerParagraph }) => {
   return (

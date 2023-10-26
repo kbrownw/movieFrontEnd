@@ -1,4 +1,4 @@
-import cityscape from "../../assets/large-cityscape.jpg";
+import cityscape from "../assets/large-cityscape.jpg";
 
 export const LargeImage = () => {
   return (
