@@ -7,12 +7,14 @@ import star from "../assets/star-line.svg";
 import { useEffect, useContext } from "react";
 import { TheaterListContext } from "../context/TheaterListContext";
 import { Loading } from "./Loading";
+import { Subheading } from "./Subheading";
 
 const pText =
   "Want to find movie showtimes near you? Just enter your ZIP code and we'll do the rest. Ready, set, action!";
 
 export const LandingPage = () => {
-  const { isLoading, theaters, theatersFound } = useContext(TheaterListContext);
+  const { isLoading, theaters, theatersFound, errorMessage } =
+    useContext(TheaterListContext);
 
   useEffect(() => {
     if (theaters.length > 0) {
@@ -43,7 +45,9 @@ export const LandingPage = () => {
       <>
         {theaters.length > 0 && theatersFound ? (
           <Results theaterResults={theaters} theatersFound={theatersFound} />
-        ) : null}
+        ) : (
+          <Subheading text={errorMessage} />
+        )}
       </>
     </>
   );

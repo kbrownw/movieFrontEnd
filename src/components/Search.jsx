@@ -1,16 +1,23 @@
 import { useEffect, useState, useContext } from "react";
 import { Button } from "./Button";
 import { TheaterListContext } from "../context/TheaterListContext";
+import { ParagraphTextWhite } from "./ParagraphTextWhite";
 
 export const Search = () => {
-  const { theaters, setTheaters, setTheatersFound, setIsLoading } =
-    useContext(TheaterListContext);
+  const {
+    theaters,
+    setTheaters,
+    setErrorMessage,
+    setTheatersFound,
+    setIsLoading,
+  } = useContext(TheaterListContext);
   const [zipCode, setZipCode] = useState("");
+  const [invalid, setInvalid] = useState(false);
+  const [searchSubmit, setSearchSubmit] = useState(false);
   let theaterURL = "https://api.showtimes-by-keith.com/?zipCode=";
   const devEnv = true;
 
   if (devEnv) {
-    console.log("Use dev enivronment.");
     theaterURL = "http://localhost:8080/?zipCode=";
   }
 
@@ -22,27 +29,38 @@ export const Search = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
+    setErrorMessage("");
     theaterURL = theaterURL + zipCode;
 
-    try {
-      const response = await fetch(theaterURL);
-      const data = await response.json();
-      setTheaters(data.data.theaters);
-      setTheatersFound(true);
-    } catch (error) {
-      console.log(error);
-      setTheaters([]);
-      setTheatersFound(false);
-      setIsLoading(false);
-    } finally {
-      setIsLoading(false);
+    if (zipCode.length === 5) {
+      setIsLoading(true);
+      setInvalid(false);
+      setSearchSubmit(true);
+      try {
+        const response = await fetch(theaterURL);
+        const data = await response.json();
+        setTheaters(data.data.theaters);
+        setTheatersFound(true);
+      } catch (error) {
+        console.log(error);
+        setErrorMessage("Uh oh, something went wrong. Please try again.");
+        setTheaters([]);
+        setTheatersFound(false);
+        setIsLoading(false);
+      } finally {
+        setIsLoading(false);
+      }
+    } else {
+      setInvalid(true);
     }
   };
 
   const handleClearResults = () => {
     setTheaters([]);
     setZipCode("");
+    setTheatersFound(false);
+    setSearchSubmit(false);
+    setErrorMessage("");
     sessionStorage.removeItem("theaters");
   };
 
@@ -58,7 +76,7 @@ export const Search = () => {
         <input
           className="rounded-lg h-14 my-5 bg-dark-blue border-[#562C2C] border-2 text-white text-xl text-center justify-self-center relative"
           type="number"
-          placeholder="47905"
+          placeholder="90210"
           name="zip-search"
           id="zip-search"
           onChange={(e) => {
@@ -74,7 +92,10 @@ export const Search = () => {
           Search
         </button>
       </form>
-      {theaters.length > 0 ? (
+      {invalid ? (
+        <ParagraphTextWhite text="Please enter a valid ZIP code." />
+      ) : null}
+      {searchSubmit || theaters.length > 0 ? (
         <Button
           text="Clear Results"
           clickFunction={handleClearResults}
