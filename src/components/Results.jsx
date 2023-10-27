@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import { ParagraphTextWhite } from "./ParagraphTextWhite";
 import { Subheading } from "./Subheading";
 import { Theaters } from "./Theaters/Theaters";
