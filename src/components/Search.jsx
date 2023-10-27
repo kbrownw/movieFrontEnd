@@ -15,11 +15,6 @@ export const Search = () => {
   const [invalid, setInvalid] = useState(false);
   const [searchSubmit, setSearchSubmit] = useState(false);
   let theaterURL = "https://api.showtimes-by-keith.com/?zipCode=";
-  const devEnv = true;
-
-  if (devEnv) {
-    theaterURL = "http://localhost:8080/?zipCode=";
-  }
 
   useEffect(() => {
     if (theaters.length > 0) {
@@ -39,8 +34,15 @@ export const Search = () => {
       try {
         const response = await fetch(theaterURL);
         const data = await response.json();
-        setTheaters(data.data.theaters);
-        setTheatersFound(true);
+        if (data.data.theaters) {
+          setTheaters(data.data.theaters);
+          setTheatersFound(true);
+        } else {
+          setErrorMessage(`No results found for ZIP code ${zipCode}.`);
+          setTheaters([]);
+          setTheatersFound(false);
+          setIsLoading(false);
+        }
       } catch (error) {
         console.log(error);
         setErrorMessage("Uh oh, something went wrong. Please try again.");

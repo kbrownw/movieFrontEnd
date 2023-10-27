@@ -8,11 +8,8 @@ export const useShowtimeAPI = () => {
   let data;
 
   const getShowtimes = async (id) => {
-    let url = "https://api.showtimes-by-keith.com/showtimes?id=" + id;
-    if (true) {
-      console.log("Using local data for showtimes.");
-      url = "http://localhost:8080/showtimes?id=" + id;
-    }
+    const url = "https://api.showtimes-by-keith.com/showtimes?id=" + id;
+
     let response;
     sessionStorage.removeItem("showtimes");
     setLoading(true);
