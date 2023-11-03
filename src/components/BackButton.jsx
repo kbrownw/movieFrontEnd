@@ -5,7 +5,7 @@ export const BackButton = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate("/");
+    navigate(-1);
   };
 
   return <Button text="Back" clickFunction={handleClick} />;
