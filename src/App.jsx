@@ -17,7 +17,7 @@ function App() {
             <Routes>
               <Route path="/" element={<LandingPage />}></Route>
               <Route
-                path={`/showtimes`}
+                path="/showtimes"
                 element={
                   <section className="grid grid-cols-1 gap-10 max-w-6xl lg:px-0 px-4 pb-10 mx-auto relative">
                     <ShowtimesLanding />

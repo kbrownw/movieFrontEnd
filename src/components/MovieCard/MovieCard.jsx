@@ -24,8 +24,18 @@ export const MovieCard = ({ showtimes }) => {
             });
           });
           showtimeArray.sort();
+          let twelveHourTime = [];
+          showtimeArray.forEach((time) => {
+            const timeSplit = time.split(":");
+            let hours = timeSplit[0];
+            const minutes = timeSplit[1];
+            const amOrPM = hours >= 12 ? "pm" : "am";
+            hours = hours % 12 || 12;
+            const finalTime = `${hours}:${minutes}${amOrPM}`;
+            twelveHourTime.push(finalTime);
+          });
 
-          const movieTimes = showtimeArray.map((time) => {
+          const movieTimes = twelveHourTime.map((time) => {
             return <li key={time}>{time}</li>;
           });
           return (
