@@ -1,7 +1,9 @@
 import styles from "./theaters.module.css";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ShowtimesContext } from "../../context/ShowtimesProvider";
+import { StarFilled } from "../StarFilled";
+import { StarHollow } from "../StarHollow";
 
 export const borderRadiusRandom = () => {
   let cornersArray = [];
@@ -19,9 +21,34 @@ export const borderRadiusRandom = () => {
   return cornersArray;
 };
 
+export const handleFavClick = async (id, name, setFavorites) => {
+  const data = await JSON.parse(localStorage.getItem("favorites"));
+  let storedFavorites = {};
+
+  if (data) {
+    storedFavorites = data;
+  }
+
+  if (storedFavorites[id]) {
+    console.log(`Removed ${storedFavorites[id]["name"]}.`);
+    delete storedFavorites[id];
+  } else {
+    storedFavorites[id] = { id: id, name: name };
+    console.log(`Added to favorites: ${storedFavorites[id]["name"]}`);
+  }
+  localStorage.setItem("favorites", JSON.stringify(storedFavorites));
+  setFavorites(storedFavorites);
+};
+
 export const Theaters = ({ theaters }) => {
   const { getShowtimes } = useContext(ShowtimesContext);
+  const [favorites, setFavorites] = useState({});
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const data = localStorage.getItem("favorites");
+    setFavorites(data);
+  }, []);
 
   const theaterCard = Object.values(theaters).map(
     ({ id, name, hasReservedSeating, distance, hasShowtimes }) => {
@@ -35,30 +62,43 @@ export const Theaters = ({ theaters }) => {
         const brCorner = "border-br-" + corners[3];
 
         return (
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              getShowtimes(id);
-              sessionStorage.setItem("theaterName", name);
-              navigate("/showtimes");
-            }}
-            key={id}
-            className={`bg-blue text-center justify-items-center grid min-w-[350px] w-[30vw] min-h-[350px] mb-10 py-20 transition hover:shadow-2xl ${styles[tlCorner]} ${styles[trCorner]} ${styles[blCorner]} ${styles[brCorner]}`}
-          >
-            <h3 className="text-white text-4xl max-w-[250px]">{name}</h3>
-            {hasReservedSeating ? (
+          <div className="relative w-[min-content]" key={id}>
+            <div className={`${styles["favorite"]} z-10`}>
+              <button
+                className="w-[32px] h-[30px]"
+                onClick={() => {
+                  handleFavClick(id, name, setFavorites);
+                }}
+              ></button>
+            </div>
+            <div className={`${styles["favorite"]} hover:shadow-lg`}>
+              {favorites[id] ? <StarFilled /> : <StarHollow />}
+            </div>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                getShowtimes(id);
+                sessionStorage.setItem("theaterName", name);
+                navigate("/showtimes");
+              }}
+              key={id}
+              className={`bg-blue text-center justify-items-center grid min-w-[350px] w-[30vw] min-h-[350px] mb-10 py-20 transition hover:shadow-2xl ${styles[tlCorner]} ${styles[trCorner]} ${styles[blCorner]} ${styles[brCorner]}`}
+            >
+              <h3 className="text-white text-4xl max-w-[250px]">{name}</h3>
+              {hasReservedSeating ? (
+                <p className="text-white font-normal text-xl">
+                  Reserved Seating Available
+                </p>
+              ) : (
+                <p className="text-white font-normal text-xl">
+                  No Reserved Seating
+                </p>
+              )}
               <p className="text-white font-normal text-xl">
-                Reserved Seating Available
+                Located {roundedDistance} miles away
               </p>
-            ) : (
-              <p className="text-white font-normal text-xl">
-                No Reserved Seating
-              </p>
-            )}
-            <p className="text-white font-normal text-xl">
-              Located {roundedDistance} miles away
-            </p>
-          </button>
+            </button>
+          </div>
         );
       }
     }

@@ -28,3 +28,9 @@
 .border-br-sm {
   border-bottom-right-radius: 1.5rem;
 }
+
+.favorite {
+  position: absolute;
+  top: 2.5rem;
+  right: 6rem;
+}
