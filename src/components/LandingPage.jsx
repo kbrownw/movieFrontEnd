@@ -8,6 +8,8 @@ import { useEffect, useContext } from "react";
 import { TheaterListContext } from "../context/TheaterListContext";
 import { Loading } from "./Loading";
 import { Subheading } from "./Subheading";
+import { FavoritesContext } from "../context/FavoritesContext";
+import { Favorites } from "./Favorites";
 
 const pText =
   "Want to find movie showtimes near you? Just enter your ZIP code and we'll do the rest. Ready, set, action!";
@@ -15,6 +17,7 @@ const pText =
 export const LandingPage = () => {
   const { isLoading, theaters, theatersFound, errorMessage } =
     useContext(TheaterListContext);
+  const { setFavorites } = useContext(FavoritesContext);
 
   useEffect(() => {
     if (theaters.length > 0) {
@@ -22,6 +25,10 @@ export const LandingPage = () => {
       theaterList.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   }, [theaters]);
+  useEffect(() => {
+    const data = localStorage.getItem("favorites");
+    setFavorites(JSON.parse(data));
+  }, []);
   return (
     <>
       <LargeImage />
@@ -40,6 +47,7 @@ export const LandingPage = () => {
         />
         <ParagraphTextWhite text={pText} />
         <Search />
+        <Favorites />
         {isLoading ? <Loading /> : null}
       </div>
       <>

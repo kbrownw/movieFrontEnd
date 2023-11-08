@@ -6,6 +6,7 @@ import { ShowtimesLanding } from "./components/ShowtimesLanding.jsx";
 import { ShowtimesWrapper } from "./context/ShowtimesProvider.jsx";
 import { TheaterListWrapper } from "./context/TheaterListContext.jsx";
 import { ContactMe } from "./components/ContactMe.jsx";
+import { FavoritesWrapper } from "./context/FavoritesContext.jsx";
 
 function App() {
   return (
@@ -13,19 +14,21 @@ function App() {
       <main className="bg-dark-blue overflow-hidden">
         <ShowtimesWrapper>
           <TheaterListWrapper>
-            <Header />
-            <Routes>
-              <Route path="/" element={<LandingPage />}></Route>
-              <Route
-                path="/showtimes"
-                element={
-                  <section className="grid grid-cols-1 gap-10 max-w-6xl lg:px-0 px-4 pb-10 mx-auto relative">
-                    <ShowtimesLanding />
-                  </section>
-                }
-              ></Route>
-              <Route path="/contact" element={<ContactMe />}></Route>
-            </Routes>
+            <FavoritesWrapper>
+              <Header />
+              <Routes>
+                <Route path="/" element={<LandingPage />}></Route>
+                <Route
+                  path="/showtimes"
+                  element={
+                    <section className="grid grid-cols-1 gap-10 max-w-6xl lg:px-0 px-4 pb-10 mx-auto relative">
+                      <ShowtimesLanding />
+                    </section>
+                  }
+                ></Route>
+                <Route path="/contact" element={<ContactMe />}></Route>
+              </Routes>
+            </FavoritesWrapper>
           </TheaterListWrapper>
         </ShowtimesWrapper>
         <Footer />

@@ -4,6 +4,9 @@ import { useContext, useEffect, useState } from "react";
 import { ShowtimesContext } from "../../context/ShowtimesProvider";
 import { StarFilled } from "../StarFilled";
 import { StarHollow } from "../StarHollow";
+import { FavoritesContext } from "../../context/FavoritesContext";
+import { TheatersFavoriteIcon } from "../TheatersFavoriteIcon";
+import { TheaterFavoriteButton } from "../TheaterFavoriteButton";
 
 export const borderRadiusRandom = () => {
   let cornersArray = [];
@@ -21,58 +24,47 @@ export const borderRadiusRandom = () => {
   return cornersArray;
 };
 
-export const handleFavClick = async (id, name, setFavorites) => {
-  const data = await JSON.parse(localStorage.getItem("favorites"));
-  let storedFavorites = {};
-
-  if (data) {
-    storedFavorites = data;
+export const buildBorderRadiusArray = (theaters) => {
+  let arr = [];
+  for (let i = 0; i < theaters.length - 1; i++) {
+    arr.push(borderRadiusRandom());
   }
-
-  if (storedFavorites[id]) {
-    console.log(`Removed ${storedFavorites[id]["name"]}.`);
-    delete storedFavorites[id];
-  } else {
-    storedFavorites[id] = { id: id, name: name };
-    console.log(`Added to favorites: ${storedFavorites[id]["name"]}`);
-  }
-  localStorage.setItem("favorites", JSON.stringify(storedFavorites));
-  setFavorites(storedFavorites);
+  return arr;
 };
 
 export const Theaters = ({ theaters }) => {
   const { getShowtimes } = useContext(ShowtimesContext);
-  const [favorites, setFavorites] = useState({});
+
+  const [cornersArray, setCornersArray] = useState([]);
   const navigate = useNavigate();
-
+  let counter = 0;
+  console.log(theaters);
   useEffect(() => {
-    const data = localStorage.getItem("favorites");
-    setFavorites(data);
-  }, []);
-
+    setCornersArray(buildBorderRadiusArray(theaters));
+  }, [theaters]);
   const theaterCard = Object.values(theaters).map(
     ({ id, name, hasReservedSeating, distance, hasShowtimes }) => {
       if (hasShowtimes == "true") {
         const roundedDistance = distance.toFixed(2);
-        const corners = borderRadiusRandom();
+        const corners = cornersArray[counter];
+        let tlCorner;
+        let trCorner;
+        let brCorner;
+        let blCorner;
 
-        const tlCorner = "border-tl-" + corners[0];
-        const trCorner = "border-tr-" + corners[1];
-        const blCorner = "border-bl-" + corners[2];
-        const brCorner = "border-br-" + corners[3];
+        if (corners) {
+          tlCorner = "border-tl-" + corners[0];
+          trCorner = "border-tr-" + corners[1];
+          blCorner = "border-bl-" + corners[2];
+          brCorner = "border-br-" + corners[3];
+        }
+
+        counter++;
 
         return (
           <div className="relative w-[min-content]" key={id}>
-            <div className={`${styles["favorite"]} z-10`}>
-              <button
-                className="w-[32px] h-[30px]"
-                onClick={() => {
-                  handleFavClick(id, name, setFavorites);
-                }}
-              ></button>
-            </div>
-            <div className={`${styles["favorite"]} hover:shadow-lg`}>
-              {favorites[id] ? <StarFilled /> : <StarHollow />}
+            <div className={`${styles.favorite}`}>
+              <TheaterFavoriteButton id={id} name={name} />
             </div>
             <button
               onClick={(e) => {
