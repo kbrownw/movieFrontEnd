@@ -5,11 +5,9 @@ export const useShowtimeAPI = () => {
   const [isLoading, setLoading] = useState(false);
   const [errorOccurred, setErrorOccurred] = useState(false);
 
-  let data;
-
   const getShowtimes = async (id) => {
     const url = "https://api.showtimes-by-keith.com/showtimes?id=" + id;
-
+    let data;
     let response;
     sessionStorage.removeItem("showtimes");
     setLoading(true);
