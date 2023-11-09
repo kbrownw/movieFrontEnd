@@ -2,10 +2,6 @@ import styles from "./theaters.module.css";
 import { useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { ShowtimesContext } from "../../context/ShowtimesProvider";
-import { StarFilled } from "../StarFilled";
-import { StarHollow } from "../StarHollow";
-import { FavoritesContext } from "../../context/FavoritesContext";
-import { TheatersFavoriteIcon } from "../TheatersFavoriteIcon";
 import { TheaterFavoriteButton } from "../TheaterFavoriteButton";
 
 export const borderRadiusRandom = () => {
@@ -34,14 +30,14 @@ export const buildBorderRadiusArray = (theaters) => {
 
 export const Theaters = ({ theaters }) => {
   const { getShowtimes } = useContext(ShowtimesContext);
-
   const [cornersArray, setCornersArray] = useState([]);
   const navigate = useNavigate();
   let counter = 0;
-  console.log(theaters);
+
   useEffect(() => {
     setCornersArray(buildBorderRadiusArray(theaters));
   }, [theaters]);
+
   const theaterCard = Object.values(theaters).map(
     ({ id, name, hasReservedSeating, distance, hasShowtimes }) => {
       if (hasShowtimes == "true") {

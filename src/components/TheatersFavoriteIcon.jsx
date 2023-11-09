@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { FavoritesContext } from "../context/FavoritesContext";
 import { StarHollow } from "./StarHollow";
 import { StarFilled } from "./StarFilled";

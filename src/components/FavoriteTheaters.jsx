@@ -2,11 +2,10 @@ import { useNavigate } from "react-router-dom";
 import { FavoritesContext } from "../context/FavoritesContext";
 import { ShowtimesContext } from "../context/ShowtimesProvider";
 import { useContext } from "react";
-import { TheatersFavoriteIcon } from "./TheatersFavoriteIcon";
 import { TheaterFavoriteButton } from "./TheaterFavoriteButton";
 
 export const FavoriteTheaters = () => {
-  const { favorites, setFavorites } = useContext(FavoritesContext);
+  const { favorites } = useContext(FavoritesContext);
   const { getShowtimes } = useContext(ShowtimesContext);
   const navigate = useNavigate();
 
